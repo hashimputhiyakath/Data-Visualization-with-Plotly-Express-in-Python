@@ -6,76 +6,364 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Visualization with Plotly Express in Python</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="container">
+            <div class="logo-wrapper">
                 <img class="logo" src="./images/plotly-logo.png" alt="">
+            </div>
         </div>
     </header>
-
-    <aside>
-        <nav id="navbar-example3" class="">
-            <nav class="nav nav-pills flex-column">
-                <a class="nav-link" href="#item-1">Item 1</a>
-                <nav class="nav nav-pills flex-column">
-                    <a class="nav-link ms-3 my-1" href="#item-1-1">Item 1-1</a>
-                    <a class="nav-link ms-3 my-1" href="#item-1-2">Item 1-2</a>
+    <div class="book">
+        <aside>
+            <div class="aside-wrapper">
+                <div class="aside-toggler">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </div>
+                <nav class="article-nav" id="articleNav" class="">
+                    <ul class="nav nav-pills level-1">
+                        <li><a class="nav-link" href="#introduction">Introduction</a></li>
+                        
+                        <a class="nav-link" href="#installing-plotly">Installing Plotly</a>
+                        <a class="nav-link" href="#get-started">Get Started</a>
+                        <a class="nav-link" href="#customize-plots">Customize Plots</a>
+                        <a class="nav-link" href="#types-of-plots">Types of Plots</a>
+                        <a class="nav-link" href="#distribution-plots">Distribution Plots</a>
+                        <ul class="nav nav-pills level-2">
+                            <a class="nav-link" href="#bar-plot">Bar Plot</a>
+                            <a class="nav-link" href="#histogram">Histogram</a>
+                            <a class="nav-link" href="#box-plot">Box Plot</a>
+                            <a class="nav-link" href="#violin-plot">Violin Plot</a>
+                            <a class="nav-link" href="#strip-plot">Strip Plot</a>
+                            <a class="nav-link" href="#dot-plot">Dot Plot</a>
+                        </ul>
+                        <a class="nav-link" href="#part-to-whole-plots">Part-To-Whole Plots</a>
+                        <ul class="nav nav-pills level-2">
+                            <a class="nav-link" href="#pie-chart">Pie Chart</a>
+                            <a class="nav-link" href="#donut-chart">Donut Chart</a>
+                            <a class="nav-link" href="#stacked-bar-plot">Stacked Bar/Stacked Column Chart</a>
+                            <a class="nav-link" href="#pie-chart">Pie Chart</a>
+                            <a class="nav-link" href="#tree-map">Tree Map</a>
+                            <a class="nav-link" href="#sun-burst-chart">Sun Burst</a>
+                        </ul>
+                    </nav>
                 </nav>
-                <a class="nav-link" href="#item-2">Item 2</a>
-                <a class="nav-link" href="#item-3">Item 3</a>
-                <nav class="nav nav-pills flex-column">
-                    <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
-                    <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
-                </nav>
-            </nav>
-        </nav>
-    </aside>
-    
-    <main>
-        <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
-        <div id="item-1">
-            <h4>Item 1</h4>
-            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-            <P>Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</P>
-        </div>
-        <div id="item-1-1">
-            <h5>Item 1-1</h5>
-            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-            <P>Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</P>
-        </div>
-        <div id="item-1-2">
-            <h5>Item 1-2</h5>
-            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-            <p>Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p>
+            </div>
+        </aside>
+   
+        <main>
+            <div class="article-wrapper">
+                <article class="article" data-bs-spy="scroll" data-bs-target="#article" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+                    
+                    <section class="introduction">
+                        <h1 id="introduction">Introduction</h1>
+                        <p><strong>Plotly Express</strong> is a high-level Python visualization library. In fact, it’s a wrapper for Plotly.py that exposes a simple syntax for complex charts.</p>
+                        <p>Inspired by Seaborn and ggplot2, it was specifically designed to have a terse, consistent and easy-to-learn API</p>
+                        <p>With just a single import, you can make richly interactive plots in just a single function call, including</p>
+                        <ul>
+                            <li>faceting, </li>
+                            <li>maps</li>
+                            <li>animations</li>
+                            <li>trendlines </li>
+                        </ul>
+                        <p>It comes with on-board datasets, color scales and themes. Some of the datasets include</p>
+                        <ul>
+                            <li>titanic</li>
+                            <li>tips</li>
+                            <li>titanic</li>
+                            <li>tips</li>
+                        </ul>
+                    </section>
+                    <section class="installing-plotly">
+                        <h1 class="display1" id="installing-plotly">Installing Plotly</h1>
+                        <p>Plotly.Express is a regular part of the Plotly python package, so the easiest is to install it all.</p>
+                        <pre class="pre-line">
+                            # pip 
+                            pip install plotly
 
-        </div>
-        <div id="item-2">
-            <h4>Item 2</h4>
-            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-            <p>Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p>
-        </div>
-        <div id="item-3">
-            <h4>Item 3</h4>
-            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-            <p>Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.
-        </div>
-        <div id="item-3-1">
-            <h5>Item 3-1</h5>
-            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-            <p>Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p>
-        </div>
-        <div id="item-3-2">
-            <h5>Item 3-2</h5>
-            <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.</p>
-            <p>Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p>
-        </div>
-        </div>
-    </main>
-    
+                            # anaconda
+                            conda install -c anaconda plotly
+                        </pre>
 
+                        <p>Plotly express require pandas to be installed</p>
+                        <pre class="pre-line">
+                            [In]: import plotly.express as px
+                            [Out]: ImportError: Plotly express requires pandas to be installed.
+                        </pre>
+                        <p>If you don't have pandas already installed, you will get an error. So, install pandas before trying to import plotly express</p>
+
+                    </section>
+                    <section class="get-started">
+                        <h1 id="get-started">Get Started</h1>
+                        <h2>Import libraries</h2>
+                        <pre class="pre-line">
+                            import numpy as np
+                            import pandas as pd
+                            import plotly.express as px
+                        </pre>
+                        <h2>Import datasets</h2>
+                        <pre class="pre-line">
+                            tips = px.data.tips()
+                            gapminder = px.data.gapminder()
+                            iris = px.data.iris()
+                        </pre>
+                        <h2>Create Plots</h2>
+                        <h3>Bar plot</h3>
+                        <pre class="pre-line">
+                            px.histogram(tips, x='smoker')
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/univariate/barplot-1.png" alt="">
+                        </div>
+                        <h3>Histogram</h3>
+                        <pre class="pre-line">
+                            px.histogram(tips, x='total_bill')
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/univariate/histogram-1.png" alt="">
+                        </div>
+                    </section>
+                    <section class="customize-plots">
+                        <h1 id="customize-plots">Customize Plots</h2>
+                        <p>Before we move to introducing a whole range of Plotly chart types, let’s explore basic techniques on how to update the axes, legend, titles, and labels.</p>
+                        <p>For basic styling, we can add additional parameters to the function used to create the plot</p>
+                        <p>This way, we can change/add the following things in the figure</p>
+                        <ul>
+                            <li>Figure main title</li>
+                            <li>Width and height</li>
+                            <li>Labels</li>
+                            <li>Category orders</li>
+                            <li>Color scheme</li>
+                            <li>Template</li>
+                        </ul>
+                        <p>First let's see a simple figure with default style</p>
+                        <pre class="pre-line">
+                            df = px.data.tips()
+                            fig = px.histogram(df, x="day", y="total_bill", color="sex")
+                            fig.show()
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/styling/plot-styling-1.png" alt="">
+                        </div>
+                        <p>Now, using parameters in the <code>px.figure_type()</code> method, we can customize the following aspects of the the figure</p>
+                        <ul>
+                            <li>Figure title </li>
+                            <li>Width ad height</li>
+                            <li>Labels/variable name (manually specify axes labels)</li>
+                            <li>Order of the groups of categorical variables</li>
+                            <li>Color map</li>
+                            <li>Template</li>
+                        </ul>
+                        <pre>
+import plotly.express as px
+
+df = px.data.tips()
+
+fig = px.histogram(df, 
+    x="day", 
+    y="total_bill", 
+    color="sex",
+    title="Receipts by Payer Gender and Day of Week",
+    width=600, height=400,
+    
+    # replaces default labels by column name
+    labels={ 
+        "sex": "Payer Gender",  "day": "Day of Week", "total_bill": "Receipts"
+    },
+
+    # replaces default order by column name
+    category_orders = { 
+        "day": ["Thur", "Fri", "Sat", "Sun"], "sex": ["Male", "Female"]
+    },
+
+    # replaces default color mapping by value
+    color_discrete_map = { 
+        "Male": "RebeccaPurple", "Female": "MediumPurple"
+    },
+
+    template="simple_white"
+)
+
+fig.show()
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/styling/plot-styling-2.png" alt="">
+                        </div>
+
+                        <p>In addition, a Plotly Express figure can be styled using the following methods as well.</p>
+                        <ul>
+                            <li>update_layout</li>
+                            <li>update_xaxes</li>
+                            <li>update_yaxes</li>
+                        </ul>
+                        <p>How to us</p>
+
+
+                        
+                        <pre>
+
+                        </pre>
+                    </section>
+                    <section class="types-of-plots">
+                        <h1 id="types-of-plots">Types of plots</h1>
+                        <p>Plots can be categorized based on the followings</p>
+                        <ul>
+                            <li>Number of variables</li>
+                            <li>Purpose of the plot</li>
+                        </ul>
+                        <h2>Plots based on number of variables</h2>
+                        <ul>
+                            <li>Univariate plots</li>
+                            <li>Bivariate plots</li>
+                            <li>Multivariate plots</li>
+                        </ul>
+                        <h2>Plots based on the purpose of plots</h2>
+                        <ul>
+                            
+                            <li>Distribution</li>
+                            <li>Ranking</li>
+                            <li>Part-to-whole</li>
+                            <li>Correlation</li>
+                            <li>Deviation</li>
+                            <li>Magnitude</li>
+                            <li>Change of over time</li>
+                            <li>Flow/movement</li>
+                            <li>Spatial</li>
+                        </ul>
+                    </section>
+                    <section class="distribution-plots">
+                        <h1 id="distribution-plots">Distribution Plots</h1>
+                        <p>The function of distribution charts is to show how data is spread across a group. This helps you spot outliers and commonalities, as well as see the shape of your data. For example, public policy officials might want to see the demographic or income characteristics of a certain population.</p>
+                        <h2 id="barPlots">Bar Plots</h2>
+                        <p>We can use both <code>px.histogram()</code> and <code>px.bar()</code> methods to create bar plots. Howevr, <code>px.bar()</code> has some specific parameters that can be used to customize a bar plot</p>
+                        <h3 id="barPlot">Bar Plot tidy data format</h3>
+                        <pre class="pre-line">
+                            px.histogram(tips, x='smoker')
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/univariate/barplot-1.png" alt="">
+                        </div>
+                        <h3 id="barPlot">Bar Plot with Long Form Data</h3>
+                        <p>Dataset - Long Form Data</p>
+                        <div class="img-wrapper">
+                            <img src="./images/long-data.png" alt="">
+                        </div>
+                        <pre class="pre-line">
+
+                            long_df = px.data.medals_long()
+
+                            fig = px.bar(long_df, x="nation", y="count", color="medal", title="Long-Form Input")
+
+                            fig.show()
+
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/bar-plot-2.png" alt="">
+                        </div>
+                        <h3 id="">Bar Plot with Wide Form Data</h3>
+                        <p>Dataset - Wide Form Data</p>
+                        <div class="img-wrapper">
+                            <img src="./images/wide-data.png" alt="">
+                        </div>
+                        <pre class="pre-line">
+                            wide_df = px.data.medals_wide()
+                            fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
+                            fig.show()
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/bar-plot-3.png" alt="">
+                        </div>
+                        <h3>Grouped Bar Plot</h3>
+                        <pre class="pre-line">
+                            df = px.data.tips()
+                            fig = px.histogram(df, x="sex", y="total_bill",
+                                        color='smoker', barmode='group',
+                                        height=400)
+                            fig.show()
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/bar-plot-grouped.png" alt="">
+                        </div>
+                        <h3>Histogram aggregation functions</h3>
+                        <p><code>px.histogram()</code> will aggregate y values by summing them by default, but the <code>histfunc</code> argument can be used to set this to <code>avg</code> to create what is sometimes called a "barplot" which summarizes the central tendency of a dataset, rather than visually representing the totality of the dataset.</p>
+                        <p>Histogram functions</p>
+                        <ul>
+                            <li>sum</li>
+                            <li>count</li>
+                            <li>avg</li>
+                        </ul>
+                        <pre class="pre-line">
+                            df = px.data.tips()
+                            fig = px.histogram(df, x="sex", y="total_bill",
+                                        color='smoker', barmode='group',
+                                        histfunc='avg',
+                                        height=400)
+                            fig.show()
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/bar-plot-hist-func-average.png" alt="">
+                        </div>
+                        <h3>Barpot with text</h3>
+                        <pre class="pre-line">
+                            import plotly.express as px
+                            df = px.data.medals_long()
+
+                            fig = px.bar(df, x="medal", y="count", color="nation", text="nation")
+                            fig.show()
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/bar-plot-text.png" alt="">
+                        </div>
+                        <h4>Format text for consistency</h4>
+                        <pre class="pre-line">
+                            df = px.data.gapminder().query("continent == 'Europe' and year == 2007 and pop > 2.e6")
+                            fig = px.bar(df, y='pop', x='country', text_auto='.2s',
+                                        title="Controlled text sizes, positions and angles")
+                            fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
+                            fig.show()
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/bar-plot-text-2.png" alt="">
+                        </div>
+                        <h3>Facetted Bar Plots</h3>
+                        <pre class="pre-line">
+                            df = px.data.tips()
+                            fig = px.bar(df, x="sex", y="total_bill", color="smoker", barmode="group",
+                                        facet_row="time", facet_col="day",
+                                        category_orders={"day": ["Thur", "Fri", "Sat", "Sun"],
+                                                        "time": ["Lunch", "Dinner"]})
+                            fig.show()
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/bar-plot-facetted.png" alt="">
+                        </div>
+                        <h2 id="histogram">Histogram</h2>
+
+
+                    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+                </article>  <!-- Article  -->
+            </div>
+            <!-- article wrapper  -->
+        </main>
+      
+    </div> <!--  .Book -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="script.js"></script>
     
 </body>
 </html>
