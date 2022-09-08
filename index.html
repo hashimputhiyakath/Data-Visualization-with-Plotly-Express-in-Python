@@ -221,6 +221,26 @@ fig.show()
                         <pre class="pre-line">
                             fig.update_yaxes(title_text="Y-axis title")
                         </pre>
+                        <h2>Update Figure Title</h2>
+                        <p>By default, there is no title for the plot</p>
+                        <pre class="pre-line">
+                            df = px.data.tips()
+                            fig = px.scatter(df, x="total_bill", y="tip", color="sex", title='Total bill vs Tip')
+                            fig.show()
+                        </pre>
+                        <div class="img-wrapper">
+                            <img src="./images/customize-plot-title.png" alt="">
+                        </div>
+                        <p>In addition to the main method, we can also use <code>update_layout()</code> function to set the title</p>
+                        <pre class="pre-line">
+                            fig.update_layout(title_text='Total bill vs Tip', title_x=0.5)
+                        </pre>
+                        <p><code>title_x</code> is used to define the horizontal positiong of the title</p>
+                        <div class="img-wrapper">
+                            <img src="./images/customize-plot-title-2.png" alt="">
+                        </div>
+                        
+                
                     </section>
                     <section class="types-of-plots">
                         <h1 id="types-of-plots">Types of plots</h1>
@@ -502,7 +522,6 @@ fig.show()
                             </div>
 
                         </div>
-
                     </section>
                     <section class="part-to-whole-plots">
                     </section>
