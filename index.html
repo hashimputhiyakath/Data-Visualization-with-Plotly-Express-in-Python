@@ -71,10 +71,14 @@
                         </ul>
                         <p>It comes with on-board datasets, color scales and themes. Some of the datasets include</p>
                         <ul>
-                            <li>titanic</li>
                             <li>tips</li>
-                            <li>titanic</li>
-                            <li>tips</li>
+                            <li>iris</li>
+                            <li>election</li>
+                            <li>gapminder</li>
+                            <li>medals_long</li>
+                            <li>medals_wide</li>
+                            <li>stocks</li>
+                            <li>wind</li>
                         </ul>
                     </section>
                     <section class="installing-plotly">
@@ -136,6 +140,7 @@
                             <li>Width and height</li>
                             <li>Labels</li>
                             <li>Category orders</li>
+                            <li>Spacing</li>
                             <li>Color scheme</li>
                             <li>Template</li>
                         </ul>
@@ -199,12 +204,22 @@ fig.show()
                             <li>update_xaxes</li>
                             <li>update_yaxes</li>
                         </ul>
-                        <p>How to us</p>
-
-
-                        
-                        <pre>
-
+                        <p>These three functions allows us to update most of the parameters of the figure. </p>
+                        <p><strong><code>update_layout</code></strong></p>
+                        <pre class="pre-line">
+                            fig.update_layout(xaxis_title="X-axis title")
+                        </pre>
+                        <p><strong>Another method with <code>update_layout</code></strong></p>
+                        <pre class="pre-line">
+                            fig.update_layout(xaxis = {"title": "X-axis title"})
+                        </pre>
+                        <p><strong><code>update_xaxes</code></strong></p>
+                        <pre class="pre-line">
+                            fig.update_xaxes(title_text="X-axis title")
+                        </pre>
+                        <p><strong><code>update_yaxes</code></strong></p>
+                        <pre class="pre-line">
+                            fig.update_yaxes(title_text="Y-axis title")
                         </pre>
                     </section>
                     <section class="types-of-plots">
@@ -222,7 +237,6 @@ fig.show()
                         </ul>
                         <h2>Plots based on the purpose of plots</h2>
                         <ul>
-                            
                             <li>Distribution</li>
                             <li>Ranking</li>
                             <li>Part-to-whole</li>
@@ -237,125 +251,269 @@ fig.show()
                     <section class="distribution-plots">
                         <h1 id="distribution-plots">Distribution Plots</h1>
                         <p>The function of distribution charts is to show how data is spread across a group. This helps you spot outliers and commonalities, as well as see the shape of your data. For example, public policy officials might want to see the demographic or income characteristics of a certain population.</p>
-                        <h2 id="barPlots">Bar Plots</h2>
-                        <p>We can use both <code>px.histogram()</code> and <code>px.bar()</code> methods to create bar plots. Howevr, <code>px.bar()</code> has some specific parameters that can be used to customize a bar plot</p>
-                        <h3 id="barPlot">Bar Plot tidy data format</h3>
-                        <pre class="pre-line">
-                            px.histogram(tips, x='smoker')
-                        </pre>
-                        <div class="img-wrapper">
-                            <img src="./images/univariate/barplot-1.png" alt="">
-                        </div>
-                        <h3 id="barPlot">Bar Plot with Long Form Data</h3>
-                        <p>Dataset - Long Form Data</p>
-                        <div class="img-wrapper">
-                            <img src="./images/long-data.png" alt="">
-                        </div>
-                        <pre class="pre-line">
+                        <div class="bar-plots">
+                            <h2 id="bar-plots">Bar Plots</h2>
+                            <p>We can use both <code>px.histogram()</code> and <code>px.bar()</code> methods to create bar plots. Howevr, <code>px.bar()</code> has some specific parameters that can be used to customize a bar plot</p>
+                            <h3 id="barPlot">Bar Plot tidy data format</h3>
+                            <pre class="pre-line">
+                                px.histogram(tips, x='smoker')
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/univariate/barplot-1.png" alt="">
+                            </div>
+                            <h3 id="barPlot">Bar Plot with Long Form Data</h3>
+                            <p>Dataset - Long Form Data</p>
+                            <div class="img-wrapper">
+                                <img src="./images/long-data.png" alt="">
+                            </div>
+                            <pre class="pre-line">
 
-                            long_df = px.data.medals_long()
+                                long_df = px.data.medals_long()
 
-                            fig = px.bar(long_df, x="nation", y="count", color="medal", title="Long-Form Input")
+                                fig = px.bar(long_df, x="nation", y="count", color="medal", title="Long-Form Input")
 
-                            fig.show()
+                                fig.show()
 
-                        </pre>
-                        <div class="img-wrapper">
-                            <img src="./images/bar-plot-2.png" alt="">
-                        </div>
-                        <h3 id="">Bar Plot with Wide Form Data</h3>
-                        <p>Dataset - Wide Form Data</p>
-                        <div class="img-wrapper">
-                            <img src="./images/wide-data.png" alt="">
-                        </div>
-                        <pre class="pre-line">
-                            wide_df = px.data.medals_wide()
-                            fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
-                            fig.show()
-                        </pre>
-                        <div class="img-wrapper">
-                            <img src="./images/bar-plot-3.png" alt="">
-                        </div>
-                        <h3>Grouped Bar Plot</h3>
-                        <pre class="pre-line">
-                            df = px.data.tips()
-                            fig = px.histogram(df, x="sex", y="total_bill",
-                                        color='smoker', barmode='group',
-                                        height=400)
-                            fig.show()
-                        </pre>
-                        <div class="img-wrapper">
-                            <img src="./images/bar-plot-grouped.png" alt="">
-                        </div>
-                        <h3>Histogram aggregation functions</h3>
-                        <p><code>px.histogram()</code> will aggregate y values by summing them by default, but the <code>histfunc</code> argument can be used to set this to <code>avg</code> to create what is sometimes called a "barplot" which summarizes the central tendency of a dataset, rather than visually representing the totality of the dataset.</p>
-                        <p>Histogram functions</p>
-                        <ul>
-                            <li>sum</li>
-                            <li>count</li>
-                            <li>avg</li>
-                        </ul>
-                        <pre class="pre-line">
-                            df = px.data.tips()
-                            fig = px.histogram(df, x="sex", y="total_bill",
-                                        color='smoker', barmode='group',
-                                        histfunc='avg',
-                                        height=400)
-                            fig.show()
-                        </pre>
-                        <div class="img-wrapper">
-                            <img src="./images/bar-plot-hist-func-average.png" alt="">
-                        </div>
-                        <h3>Barpot with text</h3>
-                        <pre class="pre-line">
-                            import plotly.express as px
-                            df = px.data.medals_long()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/bar-plot-2.png" alt="">
+                            </div>
+                            <h3 id="">Bar Plot with Wide Form Data</h3>
+                            <p>Dataset - Wide Form Data</p>
+                            <div class="img-wrapper">
+                                <img src="./images/wide-data.png" alt="">
+                            </div>
+                            <pre class="pre-line">
+                                wide_df = px.data.medals_wide()
+                                fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/bar-plot-3.png" alt="">
+                            </div>
+                            <h3>Grouped Bar Plot</h3>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.histogram(df, x="sex", y="total_bill",
+                                            color='smoker', barmode='group',
+                                            height=400)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/bar-plot-grouped.png" alt="">
+                            </div>
+                            <h3>Histogram aggregation functions</h3>
+                            <p><code>px.histogram()</code> will aggregate y values by summing them by default, but the <code>histfunc</code> argument can be used to set this to <code>avg</code> to create what is sometimes called a "barplot" which summarizes the central tendency of a dataset, rather than visually representing the totality of the dataset.</p>
+                            <p>Histogram functions</p>
+                            <ul>
+                                <li>sum</li>
+                                <li>count</li>
+                                <li>avg</li>
+                            </ul>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.histogram(df, x="sex", y="total_bill",
+                                            color='smoker', barmode='group',
+                                            histfunc='avg',
+                                            height=400)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/bar-plot-hist-func-average.png" alt="">
+                            </div>
+                            <h3>Barpot with text</h3>
+                            <pre class="pre-line">
+                                import plotly.express as px
+                                df = px.data.medals_long()
 
-                            fig = px.bar(df, x="medal", y="count", color="nation", text="nation")
-                            fig.show()
-                        </pre>
-                        <div class="img-wrapper">
-                            <img src="./images/bar-plot-text.png" alt="">
+                                fig = px.bar(df, x="medal", y="count", color="nation", text="nation")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/bar-plot-text.png" alt="">
+                            </div>
+                            <h4>Format text for consistency</h4>
+                            <pre class="pre-line">
+                                df = px.data.gapminder().query("continent == 'Europe' and year == 2007 and pop > 2.e6")
+                                fig = px.bar(df, y='pop', x='country', text_auto='.2s',
+                                            title="Controlled text sizes, positions and angles")
+                                fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/bar-plot-text-2.png" alt="">
+                            </div>
+                            <h3>Facetted Bar Plots</h3>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.bar(df, x="sex", y="total_bill", color="smoker", barmode="group",
+                                            facet_row="time", facet_col="day",
+                                            category_orders={"day": ["Thur", "Fri", "Sat", "Sun"],
+                                                            "time": ["Lunch", "Dinner"]})
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/bar-plot-facetted.png" alt="">
+                            </div>
                         </div>
-                        <h4>Format text for consistency</h4>
-                        <pre class="pre-line">
-                            df = px.data.gapminder().query("continent == 'Europe' and year == 2007 and pop > 2.e6")
-                            fig = px.bar(df, y='pop', x='country', text_auto='.2s',
-                                        title="Controlled text sizes, positions and angles")
-                            fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
-                            fig.show()
-                        </pre>
-                        <div class="img-wrapper">
-                            <img src="./images/bar-plot-text-2.png" alt="">
+                        <div class="histogram">
+                            <h2 id="histogram">Histogram</h2>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.histogram(df, x="total_bill")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/histogram-1.png" alt="">
+                            </div>
+                            <p>Change number of bins</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.histogram(df, x="total_bill", nbins=20)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/histogram-bins.png" alt="">
+                            </div>
+                            <p>Histogram with date data</p>
+                            <pre class="pre-line">
+                                df = px.data.stocks()
+                                fig = px.histogram(df, x="date")
+                                fig.update_layout(bargap=0.2)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/histogram-date.png" alt="">
+                            </div>
+                            <p>Several histograms for the different values of one column</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.histogram(df, x="total_bill", color="sex")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/histogram-overlay.png" alt="">
+                            </div>
+                            <p>Histogram with marginal plot</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.histogram(df, x="total_bill", y="tip", color="sex", marginal="rug", hover_data=df.columns)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/histogram-y-marginal-plot.png" alt="">
+                            </div>
                         </div>
-                        <h3>Facetted Bar Plots</h3>
-                        <pre class="pre-line">
-                            df = px.data.tips()
-                            fig = px.bar(df, x="sex", y="total_bill", color="smoker", barmode="group",
-                                        facet_row="time", facet_col="day",
-                                        category_orders={"day": ["Thur", "Fri", "Sat", "Sun"],
-                                                        "time": ["Lunch", "Dinner"]})
-                            fig.show()
-                        </pre>
-                        <div class="img-wrapper">
-                            <img src="./images/bar-plot-facetted.png" alt="">
-                        </div>
-                        <h2 id="histogram">Histogram</h2>
+                        <div class="boxplot">
+                            <h2 class="boxplot">Box Plots</h2>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.box(df, y="total_bill")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/boxplot-1.png" alt="">
+                            </div>
+                            <p>If a column name is given as xargument, a box plot is drawn for each value of x.</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.box(df, x="time", y="total_bill")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/boxplot-2.png" alt="">
+                            </div>
+                            <p>Box plots with points along side</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.box(df, x="time", y="total_bill", points="all")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/boxplot-with-points.png" alt="">
+                            </div>
+                            <p></p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.box(df, x="time", y="total_bill", color="smoker",
+                                notched=True, 
+                                title="Box plot of total bill",
+                                hover_data=["day"] 
+                                )
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/boxplot-with-notch.png" alt="">
+                            </div>
 
+                        </div>
+                        <div class="violin-plots">
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.violin(df, y="total_bill")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/violin-plot-1.png" alt="">
+                            </div>
+                            <p>Violin plot with boxplot and ponts</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.violin(df, y="total_bill", box=True, # draw box plot inside the violin
+                                                points='all', # can be 'outliers', or False
+                                            )
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/boxplot-with-points.png" alt="">
+                            </div>
+                            <p>Multiple violin plots</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.violin(df, y="tip", x="smoker", color="sex", box=True, points="all",
+                                        hover_data=df.columns)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/violin-plot-2.png" alt="">
+                            </div>
+                            <p>Violin Plots with overlay </p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.violin(df, y="tip", color="sex",
+                                                violinmode='overlay', # draw violins on top of each other
+                                                # default violinmode is 'group' as in example above
+                                                hover_data=df.columns)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/violin-plot-overlay.png" alt="">
+                            </div>
+                        </div>
+                        <div class="strip-plot">
+                            <h2 id="strip-plot">Strip Plot</h2>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.strip(df, x='day', y='tip')
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/strip-plot-1.png" alt="">
+                            </div>
+
+                        </div>
 
                     </section>
-
-
-
-
-
-
-
-
-
-
-
-
+                    <section class="part-to-whole-plots">
+                    </section>
+                    <section class="correlation-plots">
+                    </section>
+                    <section class="trend-plots">
+                    </section>
+                    <section class="flow-charts">
+                    </section>
+                    <section class="spatial-plots">
+                    </section>
                 </article>  <!-- Article  -->
             </div>
             <!-- article wrapper  -->
