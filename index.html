@@ -30,6 +30,14 @@
                         <a class="nav-link" href="#installing-plotly">Installing Plotly</a>
                         <a class="nav-link" href="#get-started">Get Started</a>
                         <a class="nav-link" href="#customize-plots">Customize Plots</a>
+                        <ul class="nav nav-pills level-2">
+                            <a class="nav-link" href="#font-style">Font Style</a>
+                            <a class="nav-link" href="#figure-title">Figure Title</a>
+                            <a class="nav-link" href="#axes-labels">Axes Labels</a>
+                            <a class="nav-link" href="#legend">Legend</a>
+                            <a class="nav-link" href="#color-map">Color Map</a>
+                            <a class="nav-link" href="#figure-margin">Figure Margin</a>
+                        </ul>
                         <a class="nav-link" href="#types-of-plots">Types of Plots</a>
                         <a class="nav-link" href="#distribution-plots">Distribution Plots</a>
                         <ul class="nav nav-pills level-2">
@@ -356,7 +364,7 @@ fig.show()
                                 <li></li>
                             </ul>
                             <p>Default color map for continous data</p>
-                            <pre class="pre-line">
+                            <pre    class="pre-line">
                                 df = px.data.tips()
                                 fig = px.scatter(df, x="total_bill", y="tip", color="size",
                                     title="Numeric 'size' values mean continuous color")
@@ -709,8 +717,177 @@ fig.show()
                         </div>
                     </section>
                     <section class="part-to-whole-plots">
+                        <h1 id="part-to-whole-plots">Part-to-whole Plots</h1>
+                        <p>The function of this type of plots is to show the relative frequency of each group in an easy to understand format</p>
+                        <div class="pie-charts">
+                            <h2 id="pie-chart">Pie Chart</h2>
+                            <p>We can use <code>px.pie()</code> to create bar plots. </p>
+                            <p>In px.pie, data visualized by the sectors of the pie is set in values. The sector labels are set in names.</p>
+                            <pre class="pre-line">
+                                df = px.data.gapminder().query("year == 2007").query("continent == 'Europe'")
+                                df.loc[df['pop'] < 2.e6, 'country'] = 'Other countries' # Represent only large countries
+                                fig = px.pie(df, values='pop', names='country', title='Population of European continent')
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/pie-1.png" alt="">
+                            </div>
+                            <h3>Pie chart with repeated labels</h3>
+                            <pre class="pre-line">
+                                # This dataframe has 244 lines, but 4 distinct values for `day`
+                                df = px.data.tips()
+                                fig = px.pie(df, values='tip', names='day')
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/pie-2.png" alt="">
+                            </div>
+                            <h3>Styling Pie Charts</h3>
+                            <p>Setting the color of pie sectors with px.pie</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.pie(df, values='tip', names='day', color_discrete_sequence=px.colors.sequential.RdBu)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/pie-3.png" alt="">
+                            </div>
+                            <p>Using an explicit mapping for discrete colors</p>
+                            <pre>
+                                df = px.data.tips()
+fig = px.pie(df, values='tip', names='day', color='day',
+             color_discrete_map={'Thur':'lightcyan',
+                                 'Fri':'cyan',
+                                 'Sat':'royalblue',
+                                 'Sun':'darkblue'})
+fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/pie-4.png" alt="">
+                            </div>
+                            <p>text orientation inside pie sectors</p>
+                        </div>
                     </section>
                     <section class="correlation-plots">
+                        <h2 id="correlation-plots">Correlation Plots</h2>
+                        <p>Correlation plots, also known as correlograms for more than two variables, help us to visualize the correlation between continuous variables</p>
+                        <div class="scatter-plot">
+                            <h3 id="scatter-plot">Scatter Plots</h3>
+                            <pre class="pre-line">
+                                # x and y given as DataFrame columns
+                                import plotly.express as px
+                                df = px.data.iris() # iris is a pandas DataFrame
+                                fig = px.scatter(df, x="sepal_width", y="sepal_length")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/scatter-1.png" alt="">
+                            </div>
+                            
+                            <h3 id="scatter-plot-color">Scatter Plot with Color Scheme</h3>
+                            <pre class="pre-line">
+                                df = px.data.iris()
+                                fig = px.scatter(df, x="sepal_width", y="sepal_length", color='petal_length')
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/scatter-2.png" alt="">
+                            </div>
+                            <h3 id="scatter-plot-symbol">Scatter Plot with Different Symbols</h3>
+                            <p>The symbol argument can be mapped to a column as well. A wide variety of symbols are available.</p>
+                            <pre class="pre-line">
+                                df = px.data.iris()
+                                fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", symbol="species")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/scatter-3.png" alt="">
+                            </div>
+                            
+                            <h3 id="scatter-facetting">Scatter Plot With Faceting</h3>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.scatter(df, x="total_bill", y="tip", color="smoker", facet_col="sex", facet_row="time")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/scatter-facetted.png" alt="">
+                            </div>
+                            <h3 id="scatter-plot-trendline">Scatter plot with trend line</h3>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.scatter(df, x="total_bill", y="tip", trendline="ols")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/scatter-trend-line.png" alt="">
+                            </div>
+                            <p>Displaying a single trendline with multiple traces</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.scatter(df, x="total_bill", y="tip", symbol="smoker", color="sex", trendline="ols", trendline_scope="overall")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/scatter-trend-line-overall.png" alt="">
+                            </div>
+                            <h4>Trend line options</h4>
+                            <ul>
+                                <li><code>trendline_color_override="black"</code></li>
+                                <li><code>trendline_scope="overall"</code></li> 
+                                <li><code>trendline="ols"</code></li>
+                                <li><code>trendline_options=dict(log_x=True)</code></li>
+                            </ul>
+
+                            <h4>Trend line in log </h4>
+                            <pre>
+df = px.data.gapminder(year=2007)
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", 
+                    trendline="ols", trendline_options=dict(log_x=True),
+                    title="Log-transformed fit on linear axes")
+fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/scatter-plot-trend-line-in-log.png" alt="">
+                            </div>
+
+                            <h4>Trend line and x axis in log </h4>
+                            <pre class="pre-line">
+df = px.data.gapminder(year=2007)
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", log_x=True, 
+                trendline="ols", trendline_options=dict(log_x=True),
+                title="Log-scaled X axis and log-transformed fit")
+fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/scatter-trend-line-and-axes-in-log.png" alt="">
+                            </div>
+
+                            <h3 id="dot-plot">Dot Plot</h3>
+                            <p>Scatter plots where one axis is categorical are often known as dot plots.</p>
+                            <pre class="pre-line">
+                                df = px.data.medals_long()
+                                fig = px.scatter(df, y="nation", x="count", color="medal", symbol="medal")
+                                fig.update_traces(marker_size=10)
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/dot-plot-1.png" alt="">
+                            </div>
+
+                            <h3 id="bubble-plot">Bubble Plot</h3>
+                            <p>Scatter plots with variable-sized circular markers are often known as bubble charts.</p>
+                            <pre>
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
+                 size='petal_length', hover_data=['petal_width'])
+fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/bubble-1.png" alt="">
+                            </div> 
+                        </div>
+
                     </section>
                     <section class="trend-plots">
                     </section>
