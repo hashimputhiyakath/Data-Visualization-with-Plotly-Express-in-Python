@@ -163,6 +163,7 @@
                             <li>Template</li>
                         </ul>
                         <pre>
+
 import plotly.express as px
 
 df = px.data.tips()
@@ -221,26 +222,326 @@ fig.show()
                         <pre class="pre-line">
                             fig.update_yaxes(title_text="Y-axis title")
                         </pre>
-                        <h2>Update Figure Title</h2>
-                        <p>By default, there is no title for the plot</p>
-                        <pre class="pre-line">
-                            df = px.data.tips()
-                            fig = px.scatter(df, x="total_bill", y="tip", color="sex", title='Total bill vs Tip')
-                            fig.show()
-                        </pre>
-                        <div class="img-wrapper">
-                            <img src="./images/customize-plot-title.png" alt="">
+                        <div class="title">
+                            <h2>Update Figure Title</h2>
+                            <p>By default, there is no title for the plot</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.scatter(df, x="total_bill", y="tip", color="sex", title='Total bill vs Tip')
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/customize-plot-title.png" alt="">
+                            </div>
+                            <p>In addition to the main method, we can also use <code>update_layout()</code> function to set the title</p>
+                            <pre class="pre-line">
+                                fig.update_layout(title_text='Total bill vs Tip', title_x=0.5)
+                            </pre>
+                            <p><code>title_x</code> is used to define the horizontal positiong of the title</p>
+                            <div class="img-wrapper">
+                                <img src="./images/customize-plot-title-2.png" alt="">
+                            </div>
+                            <p>Options to customize title</p>
+                            <ul>
+                                
+                            </ul>
+
+                            <ul>
+                                <li>Change title font color<code>title_font_color="RebeccaPurple"</code></li>
+                                <li>Change title font family<code>fig.update_layout(title_font_family='Arial')</code></li>
+                                <li>Change title font size<code>fig.update_layout(title_font_size=12)</code></li>
+                            </ul>
+                            <p>Options to adjust title spacing</p>
+                            <ul>
+                                <li>Change title padding bottom<code>fig.update_layout(title_pad_b=10)</code></li>
+                                <li>Change title padding left<code>fig.update_layout(title_pad_l=10)</code></li>
+                                <li>Change title padding right<code>fig.update_layout(title_pad_r=10)</code></li>
+                                <li>Change title padding top<code>fig.update_layout(title_pad_t=10)</code></li>
+                            </ul>
+                            <p>Change title text</p>
+                            <ul>
+                                <li>Change title text: <code>fig.update_layout(title_text="Title text goes here")</code></li>
+                            </ul>
+                            <p>Title X Anchoring</p>
+                            <p>Sets the title's horizontal alignment with respect to its x position. "left" means that the title starts at x, "right" means that the title ends at x and "center" means that the title's center is at x. "auto" divides `xref` by three and calculates the `xanchor` value automatically based on the value of `x`.</p>
+                            <p>fig.update_layout(title_xanchor=<VALUE>)</p>
+                            <p>Accepted values: one of <code>( "auto" | "left" | "center" | "right" )</code></p>
+                            <p>Y positioning of title</p>
+                            <p><code>fig.update_layout(title_y=0.1)</code>: Sets the y position with respect to `yref` in normalized coordinates from "0" (bottom) to "1" (top). "auto" places the baseline of the title onto the vertical center of the top margin.</p>
+                            <p>Title Y Anchoring</p>
+                            <p><code>fig.update_layout(title_yanchor="top")</code>: Accepted values: one of <code> ( "auto" | "top" | "middle" | "bottom" ) </code> Sets the title's vertical alignment with respect to its y position. "top" means that the title's cap line is at y, "bottom" means that the title's baseline is at y and "middle" means that the title's midline is at y. "auto" divides `yref` by three and calculates the `yanchor` value automatically based on the value of `y`. </p>
+
+
                         </div>
-                        <p>In addition to the main method, we can also use <code>update_layout()</code> function to set the title</p>
-                        <pre class="pre-line">
-                            fig.update_layout(title_text='Total bill vs Tip', title_x=0.5)
-                        </pre>
-                        <p><code>title_x</code> is used to define the horizontal positiong of the title</p>
-                        <div class="img-wrapper">
-                            <img src="./images/customize-plot-title-2.png" alt="">
+                        <div class="font-style">
+                            <p>Global and Local Font Specification</p>
+                            <p>You can set the figure-wide font with the <code>layout.font</code> attribute, which will apply to all titles and tick labels, but this can be overridden for specific plot items like individual axes and legend titles etc. In the following figure, we set the figure-wide font to Courier New in blue, and then override this for certain parts of the figure.</p>
+                            <pre>
+                                df = px.data.iris()
+fig = px.scatter(df, x="sepal_length", y="sepal_width", color="species",
+                title="Playing with Fonts")
+fig.update_layout(
+    font_family="Courier New",
+    font_color="blue",
+    title_font_family="Times New Roman",
+    title_font_color="red",
+    legend_title_font_color="green"
+)
+fig.update_xaxes(title_font_family="Arial")
+fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/font-style-global-and-local.png" alt="">
+                            </div>
                         </div>
-                        
-                
+                        <div class="axes-label">
+                            <h2>Change Axes Labels</h2>
+                            <p>To update the labels/variable names, we can use <code>labels</code> parameter for the main graphing function.</p>
+                            <p>Using <code>labels</code> we can select the variables of which we want to select the label and assign new label text. See example below</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.scatter(df, x="total_bill", y="tip", color="sex",
+                                    labels=dict(total_bill="Total Bill ($)", tip="Tip ($)", sex="Payer Gender")
+                                )
+                                fig.show()
+                            </pre>
+                        </div>
+                        <div class="update-legend">
+                            <h2>Update Legend</h2>
+                            <p>Add legend title</p>
+                            <pre class="pre-title">
+                                fig.update_layout(legend_title_text='Trend')
+                            </pre>
+                            <p>Legend Positioning</p>
+                            <pre class="pre-line">
+                                df = px.data.gapminder().query("year==2007")
+                                fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+                                    size="pop", size_max=45, log_x=True)
+
+                                fig.update_layout(legend=dict(
+                                    yanchor="top",
+                                    y=0.99,
+                                    xanchor="left",
+                                    x=0.01
+                                ))
+
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/legend-position.png" alt="">
+                            </div>
+                            <p>Legeng Group</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.scatter(df, x="total_bill", y="tip", color="sex", symbol="smoker", facet_col="time",
+                                        labels={"sex": "Gender", "smoker": "Smokes"})
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/legend-group.png" alt="">
+                            </div>
+                            <p>Change Legend Order</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.bar(df, x="day", y="total_bill", color="smoker", 
+                                barmode="group", 
+                                facet_col="sex", 
+                                category_orders = {
+                                    "day": ["Thur", "Fri", "Sat", "Sun"],
+                                    "smoker": ["Yes", "No"],
+                                    "sex": ["Male", "Female"]
+                                })
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/legend-order.png" alt="">
+                            </div>
+                            <p>Hide Legend</p>
+                            <pre>
+                                fig.update_layout(showlegend=False)
+                            </pre>
+                            <p>Horizontal Legend</p>
+                            <pre class="pre-line">
+                                df = px.data.gapminder().query("year==2007")
+                                fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+                                    size="pop", size_max=45, log_x=True)
+
+                                fig.update_layout(legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1
+                                ))
+
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/legend-horizontal.png" alt="">
+                            </div>
+                            <p>Styling Legend</p>
+                            <pre>
+df = px.data.gapminder().query("year==2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+    size="pop", size_max=45, log_x=True)
+    
+fig.update_layout(
+legend=dict(
+    x=0,
+    y=1,
+    traceorder="reversed",
+    title_font_family="Times New Roman",
+    font=dict(
+        family="Courier",
+        size=12,
+        color="black"
+    ),
+    bgcolor="LightSteelBlue",
+    bordercolor="Black",
+    borderwidth=2
+)
+)
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/legend-styling.png" alt="">
+                            </div>
+                            <h3>Legend Options</h3>
+                            <p>Legend can be easily costomized by using legend parameter for <code>update_layout()</code> function. <code></code></p>
+                            <p>Example: </p>
+                            <pre>
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", color="sex", title='Total bill vs Tip')
+fig.update_layout(title_x=0.5)
+
+fig.update_layout(legend=dict(
+    title_font_color="red", 
+    title=dict(font_family="Times New Roman",
+              font=dict(size=20))
+))
+
+fig.show()
+                            </pre>
+                            <p>dict can contain the following keys with approprate values</p>
+                            <ul class="legend-options-list">
+                                <li><code>font</code></li>
+                                <ul>
+                                    <li><code>color</code>. Accepted value: color (name or hexa code)</li>
+                                    <li><code>family</code>. Value: name of font family. Eg: 'Arial', 'Times New Roman' </li>
+                                    <li><code>size</code>. Accepted values: number greater than 1</li>
+                                </ul>
+                                <li><code>bgcolor</code></li>
+                                <li><code>bordercolor</code>. Sets the color of the border enclosing the legend.</li>
+                                <li><code>borderwidth</code>: Default is 0. Accepted values: number greater than or equal to zero </li>
+                                <li><code>grouptitlefont</code></li>
+                                <ul>
+                                    <li><code>color</code>. Accepted value: color name or hexa code.</li>
+                                    <li><code>family</code>. Accepted value: name of font family. Eg: 'Arial', 'Times New Roman' </li></li>
+                                    <li><code>size</code>.  Accepted values: number greater than 1</li>
+                                </ul>
+                                <li><code>title</code></li>
+                                <ul>
+                                    <li><code>font</code></li>
+                                    <ul>
+                                        <li><code>color</code>. </li>
+                                        <li><code>family</code></li>
+                                        <li><code>size</code></li>
+                                    </ul>
+                                    <li><code>side</code>. Determines the location of legend's title with respect to the legend items. Defaulted to "top" with `orientation` is "h". Defaulted to "left" with `orientation` is "v". The "top left" options could be used to expand legend area in both x and y sides. Accepted values: <code>"top"</code> | <code>"left"</code> | <code>"top left"</code></li>
+                                    <li><code>text</code>. Sets the title of the legend. Value: string</li>
+                                </ul>
+                                <li><code>x</code>. Sets the x position (in normalized coordinates) of the legend. Defaults to "1.02" for vertical legends and defaults to "0" for horizontal legends. Accepted value: number between or equal to -2 and 3</li>
+                                <li><code>xanchor</code>. Sets the legend's horizontal position anchor. Accepted values: one of ( "auto" | "left" | "center" | "right" )</li>
+                                <li><code>y</code>. Sets the y position (in normalized coordinates) of the legend. Defaults to "1" for vertical legends, defaults to "-0.1" for horizontal legends on graphs w/o range sliders and defaults to "1.1" for horizontal legends on graph with one or multiple range sliders. Accepted values: number between or equal to -2 and 3</li>
+                                <li><code>yanchor</code>. Sets the legend's vertical position anchor This anchor binds the `y` position to the "top", "middle" or "bottom" of the legend. Value "auto" anchors legends at their bottom for `y` values less than or equal to 1/3, anchors legends to at their top for `y` values greater than or equal to 2/3 and anchors legends with respect to their middle otherwise. Accepted values: one of ( "auto" | "top" | "middle" | "bottom" )</li>
+                                <li><code>itemwidth=30</code>. Sets the width (in px) of the legend item symbols (the part other than the title.text). Accepted values: number greater than or equal to 30. </li>
+                                <li><code>orientation="v"</code>. Accepted values: <code>'v'</code> or <code>'h'</code> </li>
+                            </ul>
+                        </div>
+                        <div class="color-map">
+                            <h2>Color Map</h2>
+                            <p>Different color mapping scheme for categorical and continous data</p>
+                            <ul>
+                                <li>Categorical : Discete color map</li>
+                                <li>Continous : Countinous color map</li>
+                            </ul>
+                            <p>Default color map for categorical data</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.scatter(df, x="total_bill", y="tip", color="smoker",
+                                                title="String 'smoker' values mean discrete colors")
+
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/color-map-discrete-default.png" alt="">
+                            </div>
+                            <p>Examples of discrete color map</p>
+                            <ul>
+                                <li></li>
+                            </ul>
+                            <p>Default color map for continous data</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.scatter(df, x="total_bill", y="tip", color="size",
+                                    title="Numeric 'size' values mean continuous color")
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/color-map-cont-default.png" alt="">
+                            </div>
+                            <p>Examples of continous color map</p>
+                            <ul>
+                                <li></li>
+                            </ul>
+                            <p>More exmaples</p>
+                            <div class="img-wrapper">
+                                <img src="./images/customization-sample-1.png" alt="">
+                            </div>
+                            <pre>
+fig = px.line(df, x = "date", y = "total_cases")
+fig.update_layout(title="Number of Cumulative Cases of COVID-19 in India from January 1, 2021 to September 24, 2021", 
+    title_x=0.5,
+    xaxis_title="", 
+    font_size=15,
+    template="seaborn",
+    yaxis = dict(ticks = "outside", tickcolor='white', ticklen=10, title="Number of cumulative cases (in millions)"),
+    xaxis = dict(ticks = "outside", tickcolor='white', ticklen=10)
+    )
+fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/customization-sample-2.png" alt="">
+                            </div>
+                            <pre>
+fig = px.line(df, y=['Shares', 'Comments', 'Positive', 'Negative'], width=1200, height=600)
+fig.update_layout(
+    title="Weekly engagement trends from January 1, 2021 to September 24, 2021",
+    margin=dict(
+        t=120
+    ),
+    title_x=0.5,
+    yaxis = dict(ticks = "outside", tickcolor='white', ticklen=10, title="Average engagement per post"),
+    xaxis = dict(ticks = "outside", tickcolor='white', ticklen=10, title=""),
+    font_size=14,
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1,
+        title="",
+    )
+)
+fig.update_yaxes(type="log", showgrid=True, dtick=1)
+fig.show()
+                            </pre>
+                        </div>
+                        <div class="adjust-spacing">
+                            
+                        </div>
+
+
+
                     </section>
                     <section class="types-of-plots">
                         <h1 id="types-of-plots">Types of plots</h1>
