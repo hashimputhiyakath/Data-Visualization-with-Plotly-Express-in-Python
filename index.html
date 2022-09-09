@@ -206,24 +206,21 @@ fig.show()
                             <li>update_yaxes</li>
                         </ul>
                         <p>These three functions allows us to update most of the parameters of the figure. </p>
-                        <p><strong><code>update_layout</code></strong></p>
                         <pre class="pre-line">
                             fig.update_layout(xaxis_title="X-axis title")
-                        </pre>
-                        <p><strong>Another method with <code>update_layout</code></strong></p>
-                        <pre class="pre-line">
+
+                            # Another method with <code>update_layout</code>
                             fig.update_layout(xaxis = {"title": "X-axis title"})
-                        </pre>
-                        <p><strong><code>update_xaxes</code></strong></p>
-                        <pre class="pre-line">
+
+                            # update_xaxes
                             fig.update_xaxes(title_text="X-axis title")
-                        </pre>
-                        <p><strong><code>update_yaxes</code></strong></p>
-                        <pre class="pre-line">
+
+                            # update y axis title
                             fig.update_yaxes(title_text="Y-axis title")
+
                         </pre>
                         <div class="font-style">
-                            <p>Global and Local Font Specification</p>
+                            <h2 id="font-style">Global and Local Font Specification</h2>
                             <p>You can set the figure-wide font with the <code>layout.font</code> attribute, which will apply to all titles and tick labels, but this can be overridden for specific plot items like individual axes and legend titles etc. In the following figure, we set the figure-wide font to Courier New in blue, and then override this for certain parts of the figure.</p>
                             <pre>
                                 df = px.data.iris()
@@ -243,26 +240,8 @@ fig.show()
                                 <img src="./images/font-style-global-and-local.png" alt="">
                             </div>
                         </div>
-                        <div class="title">
-                            <h2>Update Figure Title</h2>
-                            <p>By default, there is no title for the plot</p>
-                            <pre class="pre-line">
-                                df = px.data.tips()
-                                fig = px.scatter(df, x="total_bill", y="tip", color="sex", title='Total bill vs Tip')
-                                fig.show()
-                            </pre>
-                            <div class="img-wrapper">
-                                <img src="./images/customize-plot-title.png" alt="">
-                            </div>
-                            <p>In addition to the main method, we can also use <code>update_layout()</code> function to set the title</p>
-                            <pre class="pre-line">
-                                fig.update_layout(title_text='Total bill vs Tip', title_x=0.5)
-                            </pre>
-                            <p><code>title_x</code> is used to define the horizontal positiong of the title</p>
-                            <div class="img-wrapper">
-                                <img src="./images/customize-plot-title-2.png" alt="">
-                            </div>
-                            <p>Options to customize title</p>
+                        <div class="figure-title">
+                            <h2 id="figure-title">Options to customize title</h2>
                             <ul class="customizing-options title-customizing-options">
                                 <li><code>title</code></li>
                                 <ul>
@@ -289,8 +268,8 @@ fig.show()
                                 </ul>
                             </ul>
                         </div>
-                        <div class="axes-label">
-                            <h2>Change Axes Labels</h2>
+                        <div class="axes-labels">
+                            <h2 id="axes-labels">Change Axes Labels</h2>
                             <p>To update the labels/variable names, we can use <code>labels</code> parameter for the main graphing function.</p>
                             <p>Using <code>labels</code> we can select the variables of which we want to select the label and assign new label text. See example below</p>
                             <pre class="pre-line">
@@ -301,106 +280,8 @@ fig.show()
                                 fig.show()
                             </pre>
                         </div>
-                        <div class="update-legend">
-                            <h2>Update Legend</h2>
-                            <p>Add legend title</p>
-                            <pre class="pre-title">
-                                fig.update_layout(legend_title_text='Trend')
-                            </pre>
-                            <p>Legend Positioning</p>
-                            <pre class="pre-line">
-                                df = px.data.gapminder().query("year==2007")
-                                fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
-                                    size="pop", size_max=45, log_x=True)
-
-                                fig.update_layout(legend=dict(
-                                    yanchor="top",
-                                    y=0.99,
-                                    xanchor="left",
-                                    x=0.01
-                                ))
-
-                                fig.show()
-                            </pre>
-                            <div class="img-wrapper">
-                                <img src="./images/legend-position.png" alt="">
-                            </div>
-                            <p>Legeng Group</p>
-                            <pre class="pre-line">
-                                df = px.data.tips()
-                                fig = px.scatter(df, x="total_bill", y="tip", color="sex", symbol="smoker", facet_col="time",
-                                        labels={"sex": "Gender", "smoker": "Smokes"})
-                                fig.show()
-                            </pre>
-                            <div class="img-wrapper">
-                                <img src="./images/legend-group.png" alt="">
-                            </div>
-                            <p>Change Legend Order</p>
-                            <pre class="pre-line">
-                                df = px.data.tips()
-                                fig = px.bar(df, x="day", y="total_bill", color="smoker", 
-                                barmode="group", 
-                                facet_col="sex", 
-                                category_orders = {
-                                    "day": ["Thur", "Fri", "Sat", "Sun"],
-                                    "smoker": ["Yes", "No"],
-                                    "sex": ["Male", "Female"]
-                                })
-                                fig.show()
-                            </pre>
-                            <div class="img-wrapper">
-                                <img src="./images/legend-order.png" alt="">
-                            </div>
-                            <p>Hide Legend</p>
-                            <pre>
-                                fig.update_layout(showlegend=False)
-                            </pre>
-                            <p>Horizontal Legend</p>
-                            <pre class="pre-line">
-                                df = px.data.gapminder().query("year==2007")
-                                fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
-                                    size="pop", size_max=45, log_x=True)
-
-                                fig.update_layout(legend=dict(
-                                    orientation="h",
-                                    yanchor="bottom",
-                                    y=1.02,
-                                    xanchor="right",
-                                    x=1
-                                ))
-
-                                fig.show()
-                            </pre>
-                            <div class="img-wrapper">
-                                <img src="./images/legend-horizontal.png" alt="">
-                            </div>
-                            <p>Styling Legend</p>
-                            <pre>
-df = px.data.gapminder().query("year==2007")
-fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
-    size="pop", size_max=45, log_x=True)
-    
-fig.update_layout(
-legend=dict(
-    x=0,
-    y=1,
-    traceorder="reversed",
-    title_font_family="Times New Roman",
-    font=dict(
-        family="Courier",
-        size=12,
-        color="black"
-    ),
-    bgcolor="LightSteelBlue",
-    bordercolor="Black",
-    borderwidth=2
-)
-)
-                            </pre>
-                            <div class="img-wrapper">
-                                <img src="./images/legend-styling.png" alt="">
-                            </div>
-                            <h3>Legend Options</h3>
+                        <div class="legend">
+                            <h2 id="legend">Legend Options</h2>
                             <p>Legend can be easily costomized by using legend parameter for <code>update_layout()</code> function. <code></code></p>
                             <p>Example: </p>
                             <pre>
@@ -453,7 +334,7 @@ fig.show()
                             </ul>
                         </div>
                         <div class="color-map">
-                            <h2>Color Map</h2>
+                            <h2 id="color-map">Color Map</h2>
                             <p>Different color mapping scheme for categorical and continous data</p>
                             <ul>
                                 <li>Categorical : Discete color map</li>
@@ -531,8 +412,9 @@ fig.update_yaxes(type="log", showgrid=True, dtick=1)
 fig.show()
                             </pre>
                         </div>
-                        <div class="margin">
-                            <ul>
+                        <div class="figure-margin">
+                            <h2 id="figure-margin">Adjust figure margin</h2>
+                            <ul class="customizing-options">
                                 <li><code>margin</code></li>
                                 <ul>
                                     <li><code>autoexpand</code>. Turns on/off margin expansion computations. Legends, colorbars, updatemenus, sliders, axis rangeselector and rangeslider are allowed to push the margins by defaults. Type: Boolean. Default: True</li>
@@ -544,9 +426,6 @@ fig.show()
                                 </ul>
                             </ul>
                         </div>
-
-
-
                     </section>
                     <section class="types-of-plots">
                         <h1 id="types-of-plots">Types of plots</h1>
