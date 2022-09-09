@@ -222,57 +222,6 @@ fig.show()
                         <pre class="pre-line">
                             fig.update_yaxes(title_text="Y-axis title")
                         </pre>
-                        <div class="title">
-                            <h2>Update Figure Title</h2>
-                            <p>By default, there is no title for the plot</p>
-                            <pre class="pre-line">
-                                df = px.data.tips()
-                                fig = px.scatter(df, x="total_bill", y="tip", color="sex", title='Total bill vs Tip')
-                                fig.show()
-                            </pre>
-                            <div class="img-wrapper">
-                                <img src="./images/customize-plot-title.png" alt="">
-                            </div>
-                            <p>In addition to the main method, we can also use <code>update_layout()</code> function to set the title</p>
-                            <pre class="pre-line">
-                                fig.update_layout(title_text='Total bill vs Tip', title_x=0.5)
-                            </pre>
-                            <p><code>title_x</code> is used to define the horizontal positiong of the title</p>
-                            <div class="img-wrapper">
-                                <img src="./images/customize-plot-title-2.png" alt="">
-                            </div>
-                            <p>Options to customize title</p>
-                            <ul>
-                                
-                            </ul>
-
-                            <ul>
-                                <li>Change title font color<code>title_font_color="RebeccaPurple"</code></li>
-                                <li>Change title font family<code>fig.update_layout(title_font_family='Arial')</code></li>
-                                <li>Change title font size<code>fig.update_layout(title_font_size=12)</code></li>
-                            </ul>
-                            <p>Options to adjust title spacing</p>
-                            <ul>
-                                <li>Change title padding bottom<code>fig.update_layout(title_pad_b=10)</code></li>
-                                <li>Change title padding left<code>fig.update_layout(title_pad_l=10)</code></li>
-                                <li>Change title padding right<code>fig.update_layout(title_pad_r=10)</code></li>
-                                <li>Change title padding top<code>fig.update_layout(title_pad_t=10)</code></li>
-                            </ul>
-                            <p>Change title text</p>
-                            <ul>
-                                <li>Change title text: <code>fig.update_layout(title_text="Title text goes here")</code></li>
-                            </ul>
-                            <p>Title X Anchoring</p>
-                            <p>Sets the title's horizontal alignment with respect to its x position. "left" means that the title starts at x, "right" means that the title ends at x and "center" means that the title's center is at x. "auto" divides `xref` by three and calculates the `xanchor` value automatically based on the value of `x`.</p>
-                            <p>fig.update_layout(title_xanchor=<VALUE>)</p>
-                            <p>Accepted values: one of <code>( "auto" | "left" | "center" | "right" )</code></p>
-                            <p>Y positioning of title</p>
-                            <p><code>fig.update_layout(title_y=0.1)</code>: Sets the y position with respect to `yref` in normalized coordinates from "0" (bottom) to "1" (top). "auto" places the baseline of the title onto the vertical center of the top margin.</p>
-                            <p>Title Y Anchoring</p>
-                            <p><code>fig.update_layout(title_yanchor="top")</code>: Accepted values: one of <code> ( "auto" | "top" | "middle" | "bottom" ) </code> Sets the title's vertical alignment with respect to its y position. "top" means that the title's cap line is at y, "bottom" means that the title's baseline is at y and "middle" means that the title's midline is at y. "auto" divides `yref` by three and calculates the `yanchor` value automatically based on the value of `y`. </p>
-
-
-                        </div>
                         <div class="font-style">
                             <p>Global and Local Font Specification</p>
                             <p>You can set the figure-wide font with the <code>layout.font</code> attribute, which will apply to all titles and tick labels, but this can be overridden for specific plot items like individual axes and legend titles etc. In the following figure, we set the figure-wide font to Courier New in blue, and then override this for certain parts of the figure.</p>
@@ -293,6 +242,52 @@ fig.show()
                             <div class="img-wrapper">
                                 <img src="./images/font-style-global-and-local.png" alt="">
                             </div>
+                        </div>
+                        <div class="title">
+                            <h2>Update Figure Title</h2>
+                            <p>By default, there is no title for the plot</p>
+                            <pre class="pre-line">
+                                df = px.data.tips()
+                                fig = px.scatter(df, x="total_bill", y="tip", color="sex", title='Total bill vs Tip')
+                                fig.show()
+                            </pre>
+                            <div class="img-wrapper">
+                                <img src="./images/customize-plot-title.png" alt="">
+                            </div>
+                            <p>In addition to the main method, we can also use <code>update_layout()</code> function to set the title</p>
+                            <pre class="pre-line">
+                                fig.update_layout(title_text='Total bill vs Tip', title_x=0.5)
+                            </pre>
+                            <p><code>title_x</code> is used to define the horizontal positiong of the title</p>
+                            <div class="img-wrapper">
+                                <img src="./images/customize-plot-title-2.png" alt="">
+                            </div>
+                            <p>Options to customize title</p>
+                            <ul class="customizing-options title-customizing-options">
+                                <li><code>title</code></li>
+                                <ul>
+                                    <li><code>font</code></li>
+                                    <ul>
+                                        <li><code>color</code></li>
+                                        <li><code>family</code></li>
+                                        <li><code>size</code></li>
+                                    </ul>
+                                    <li><code>pad</code></li>
+                                    <ul>
+                                        <li><code>b</code></li>
+                                        <li><code>l</code></li>
+                                        <li><code>r</code></li>
+                                        <li><code>t</code></li>
+                                    </ul>
+                                    <li><code>text</code></li>
+                                    <li><code>x</code>. Sets the x position with respect to `xref` in normalized coordinates from "0" (left) to "1" (right). Accepted values: number between or equal to 0 and 1. Default: 0.5</li>
+                                    <li><code>xanchor</code>Sets the title's horizontal alignment with respect to its x position. "left" means that the title starts at x, "right" means that the title ends at x and "center" means that the title's center is at x. "auto" divides `xref` by three and calculates the `xanchor` value automatically based on the value of `x`. Type: enumerated , one of ( "auto" | "left" | "center" | "right" ). Default: "auto"</li>
+                                    <li><code>xref</code>. Sets the container `x` refers to. "container" spans the entire `width` of the plot. "paper" refers to the width of the plotting area only. Type: enumerated , one of ( "container" | "paper" ). Default: "container"</li>
+                                    <li><code>y</code>. Sets the y position with respect to `yref` in normalized coordinates from "0" (bottom) to "1" (top). "auto" places the baseline of the title onto the vertical center of the top margin. Accepted values: number between or equal to 0 and 1. Default: 'auto'</li>
+                                    <li><code>yanchor</code>. Sets the title's vertical alignment with respect to its y position. "top" means that the title's cap line is at y, "bottom" means that the title's baseline is at y and "middle" means that the title's midline is at y. "auto" divides `yref` by three and calculates the `yanchor` value automatically based on the value of `y`. Accepted values:  one of ( "auto" | "top" | "middle" | "bottom" ). Default: 'auto'</li>
+                                    <li><code>yref</code>. Sets the container `y` refers to. "container" spans the entire `height` of the plot. "paper" refers to the height of the plotting area only. Accepted values: one of ( "container" | "paper" ). Default: "container"</li>
+                                </ul>
+                            </ul>
                         </div>
                         <div class="axes-label">
                             <h2>Change Axes Labels</h2>
@@ -536,8 +531,18 @@ fig.update_yaxes(type="log", showgrid=True, dtick=1)
 fig.show()
                             </pre>
                         </div>
-                        <div class="adjust-spacing">
-                            
+                        <div class="margin">
+                            <ul>
+                                <li><code>margin</code></li>
+                                <ul>
+                                    <li><code>autoexpand</code>. Turns on/off margin expansion computations. Legends, colorbars, updatemenus, sliders, axis rangeselector and rangeslider are allowed to push the margins by defaults. Type: Boolean. Default: True</li>
+                                    <li><code>b</code>. Sets the bottom margin (in px). Default: 80</li>
+                                    <li><code>l</code>. Sets the left margin (in px). Default: 80</li>
+                                    <li><code>r</code>. Sets the right margin (in px). Default: 80</li>
+                                    <li><code>t</code>. Sets the top margin (in px). Default: 80</li>
+                                    <li><code>pad</code>. Sets the amount of padding (in px) between the plotting area and the axis lines. Accepted values: Number greater than 0. Default 0</li>
+                                </ul>
+                            </ul>
                         </div>
 
 
